@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis 15 Años</title>
+  
+  <!-- Tipografías y Fuentes de Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. PALETA DE COLORES Y FUENTES
+       ========================================================================== */
+    :root {
+      --color-primario-grad: linear-gradient(135deg, #b30024 0%, #5e0011 100%);
+      --color-primario-hover: linear-gradient(135deg, #d6002b 0%, #7a0016 100%);
+      --color-tarjeta: rgba(20, 8, 12, 0.85);
+      --color-acento: #e8d5d5; /* Plata cuarzo delicado */
+      --color-borde: rgba(232, 213, 213, 0.25);
+      --color-texto: #ffffff;
+      --color-texto-suave: #d0c0c5;
+      
+      --fuente-titulo: 'Cormorant Garamond', serif;
+      --fuente-cuerpo: 'Montserrat', sans-serif;
+      --tamano-titulo: 2.8rem;
+      --tamano-subtitulo: 1.1rem;
+      --tamano-cuerpo: 0.95rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* FONDO TORNASOLADO ANIMADO EN ROJO Y NEGRO */
+    body {
+      background: linear-gradient(-45deg, #0d0104, #3b000d, #1a0006, #6b0018, #240008, #000000);
+      background-size: 400% 400%;
+      animation: tornasolFondo 10s ease infinite;
+      color: var(--color-texto);
+      font-family: var(--fuente-cuerpo);
+      font-size: var(--tamano-cuerpo);
+      line-height: 1.6;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Destellos de luz sobre el tornasolado */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 30%, rgba(179, 0, 36, 0.25) 0%, transparent 40%),
+                  radial-gradient(circle at 70% 70%, rgba(232, 213, 213, 0.1) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+      animation: brilloTornasol 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes tornasolFondo {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes brilloTornasol {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+      100% { transform: scale(1.15) rotate(5deg); opacity: 0.9; }
+    }
+
+    /* Contenedor Principal */
+    .wrapper {
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(12, 4, 7, 0.75);
+      box-shadow: 0 0 35px rgba(0,0,0,0.95);
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+      padding-bottom: 50px;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Marco Decorativo */
+    .border-frame {
+      border: 1px solid var(--color-borde);
+      margin: 12px;
+      padding: 20px 12px;
+      border-radius: 12px;
+    }
+
+    /* Botón Flotante de Música */
+    .music-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 52px;
+      height: 52px;
+      background: var(--color-primario-grad);
+      color: var(--color-texto);
+      border: 1px solid var(--color-acento);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 18px rgba(179, 0, 36, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    .music-btn.playing {
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(179, 0, 36, 0.8); }
+      70% { transform: scale(1.08); box-shadow: 0 0 0 14px rgba(179, 0, 36, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(179, 0, 36, 0); }
+    }
+
+    /* Encabezado */
+    .hero {
+      padding: 35px 15px 20px;
+    }
+
+    .hero-subtitle {
+      font-size: var(--tamano-subtitulo);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--color-acento);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: var(--fuente-titulo);
+      font-size: var(--tamano-titulo);
+      font-weight: 700;
+      color: var(--color-texto);
+      margin-bottom: 15px;
+      line-height: 1.1;
+    }
+
+    .divider {
+      width: 70px;
+      height: 1px;
+      background-color: var(--color-acento);
+      margin: 20px auto;
+      position: relative;
+      opacity: 0.6;
+    }
+
+    .divider::after {
+      content: '❖';
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(12, 4, 7, 0.9);
+      color: var(--color-acento);
+      padding: 0 6px;
+      font-size: 11px;
+    }
+
+    /* Secciones */
+    .section {
+      background-color: var(--color-tarjeta);
+      margin: 20px 10px;
+      padding: 22px 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
+
+    .section-title {
+      font-family: var(--fuente-titulo);
+      font-size: 1.8rem;
+      color: var(--color-acento);
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    /* Cuenta Regresiva Ajustada */
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 15px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .countdown-box {
+      background-color: rgba(0, 0, 0, 0.65);
+      border: 1px solid var(--color-borde);
+      padding: 8px 4px;
+      border-radius: 8px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .countdown-number {
+      font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+      font-weight: bold;
+      color: var(--color-texto);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .countdown-label {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-texto-suave);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Botones Sofisticados */
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 13px 20px;
+      margin-top: 15px;
+      background: var(--color-primario-grad);
+      color: var(--color-texto);
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      border: 1px solid rgba(232, 213, 213, 0.3);
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(179, 0, 36, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover, .btn:active {
+      background: var(--color-primario-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(179, 0, 36, 0.6);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--color-texto-suave);
+      color: var(--color-texto-suave);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover, .btn-secondary:active {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--color-texto);
+      box-shadow: none;
+    }
+
+    /* Carrusel de Galería */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      cursor: pointer;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 8px;
+      pointer-events: none;
+    }
+
+    .carousel-btn {
+      background: rgba(12, 4, 7, 0.85);
+      color: var(--color-texto);
+      border: 1px solid var(--color-borde);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    /* Modales Popup */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: var(--color-tarjeta);
+      border: 1px solid var(--color-borde);
+      padding: 25px 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 100%;
+      position: relative;
+      text-align: left;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: var(--color-texto-suave);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 8px;
+      border: 1px solid var(--color-borde);
+    }
+
+    .bank-data {
+      background-color: rgba(0,0,0,0.6);
+      padding: 10px;
+      border-radius: 6px;
+      margin: 8px 0;
+      font-family: monospace;
+      font-size: 0.9rem;
+      word-break: break-all;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="border-frame">
+
+      <!-- Botón Flotante de Música -->
+      <button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Música">
+        <i class="fas fa-music"></i>
+      </button>
+
+      <!-- Audio de Fondo -->
+      <audio id="bgMusic" loop preload="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+      </audio>
+
+      <!-- ENCABEZADO -->
+      <header class="hero">
+        <p class="hero-subtitle" id="textSubtitulo"></p>
+        <h1 class="hero-title" id="textNombre"></h1>
+        <div class="divider"></div>
+        <p id="textFrase" style="font-style: italic; color: var(--color-texto-suave); font-size: 0.9rem;"></p>
+      </header>
+
+      <!-- CUENTA REGRESIVA -->
+      <section class="section">
+        <h2 class="section-title">Faltan</h2>
+        <div class="countdown-container">
+          <div class="countdown-box"><span class="countdown-number" id="cdDays">0</span><span class="countdown-label">Días</span></div>
+          <div class="countdown-box"><span class="countdown-number" id="cdHours">0</span><span class="countdown-label">Hs</span></div>
+          <div class="countdown-box"><span class="countdown-number" id="cdMinutes">0</span><span class="countdown-label">Min</span></div>
+          <div class="countdown-box"><span class="countdown-number" id="cdSeconds">0</span><span class="countdown-label">Seg</span></div>
+        </div>
+      </section>
+
+      <!-- UBICACIÓN Y FECHA -->
+      <section class="section">
+        <i class="fas fa-calendar-alt fa-2x" style="color: var(--color-acento); margin-bottom: 10px;"></i>
+        <h2 class="section-title">Cuándo y Dónde</h2>
+        <p id="textFechaHora" style="font-size: 1.05rem; font-weight: 600; margin-bottom: 6px;"></p>
+        <p id="textNombreLugar" style="color: var(--color-acento); font-weight: 500;"></p>
+        <p id="textDireccionLugar" style="color: var(--color-texto-suave); margin-bottom: 15px; font-size: 0.85rem;"></p>
+        <a id="linkUbicacion" href="#" target="_blank" class="btn">
+          <i class="fas fa-map-marker-alt"></i> Ver Ubicación GPS
+        </a>
+      </section>
+
+      <!-- GALERÍA DE FOTOS -->
+      <section class="section">
+        <h2 class="section-title">Mis Fotos</h2>
+        <p style="font-size: 0.8rem; color: var(--color-texto-suave);">Toca una foto para ampliarla</p>
+        <div class="carousel-container">
+          <div class="carousel-track" id="carouselTrack">
+            <!-- Dinámico: foto1.jpg a foto10.jpg -->
+          </div>
+          <div class="carousel-nav">
+            <button class="carousel-btn" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- DRESS CODE -->
+      <section class="section">
+        <i class="fas fa-user-tie fa-2x" style="color: var(--color-acento); margin-bottom: 10px;"></i>
+        <h2 class="section-title" id="textDressCodeTitulo">Dress Code</h2>
+        <p id="textDressCodeDetalle" style="color: var(--color-texto-suave);"></p>
+      </section>
+
+      <!-- CONFIRMACIÓN DE ASISTENCIA -->
+      <section class="section">
+        <i class="fas fa-envelope-open-text fa-2x" style="color: var(--color-acento); margin-bottom: 10px;"></i>
+        <h2 class="section-title">Confirmación</h2>
+        <p style="color: var(--color-texto-suave); margin-bottom: 15px;">Es muy importante que me confirmes tu presencia antes de la fecha indicada.</p>
+        <a id="linkRSVP" href="#" target="_blank" class="btn">
+          <i class="fas fa-check-circle"></i> Confirmar Asistencia
+        </a>
+      </section>
+
+      <!-- REGALOS / DATOS BANCARIOS (SIN ALIAS) -->
+      <section class="section">
+        <i class="fas fa-gift fa-2x" style="color: var(--color-acento); margin-bottom: 10px;"></i>
+        <h2 class="section-title">Regalos</h2>
+        <p id="textRegalos" style="color: var(--color-texto-suave); margin-bottom: 15px; font-size: 0.9rem;"></p>
+        <button class="btn btn-secondary" onclick="openModal('modalRegalos')">
+          <i class="fas fa-university"></i> Ver Datos Bancarios
+        </button>
+      </section>
+
+      <!-- MÓDULOS OPCIONALES -->
+      <!-- Playlist -->
+      <section class="section" id="secPlaylist">
+        <i class="fas fa-compact-disc fa-2x" style="color: var(--color-acento); margin-bottom: 10px;"></i>
+        <h2 class="section-title">Música de la Fiesta</h2>
+        <p style="color: var(--color-texto-suave); margin-bottom: 15px;">¿Qué canción querés bailar sí o sí?</p>
+        <a id="linkPlaylist" href="#" target="_blank" class="btn btn-secondary">
+          <i class="fas fa-plus-circle"></i> Sugerir Canción
+        </a>
+      </section>
+
+      <!-- Álbum Compartido -->
+      <section class="section" id="secAlbum">
+        <i class="fas fa-camera fa-2x" style="color: var(--color-acento); margin-bottom: 10px;"></i>
+        <h2 class="section-title">Álbum Compartido</h2>
+        <p style="color: var(--color-texto-suave); margin-bottom: 15px;">Subí tus fotos sacadas durante la fiesta para guardarlas de recuerdo.</p>
+        <a id="linkAlbum" href="#" target="_blank" class="btn btn-secondary">
+          <i class="fas fa-upload"></i> Subir Fotos
+        </a>
+      </section>
+
+      <!-- Instagram -->
+      <section class="section" id="secInstagram">
+        <i class="fab fa-instagram fa-2x" style="color: var(--color-acento); margin-bottom: 10px;"></i>
+        <h2 class="section-title">Instagram</h2>
+        <p style="color: var(--color-texto-suave); margin-bottom: 15px;">Etiquetame en tus historias o fotos con el hashtag oficial.</p>
+        <a id="linkInstagram" href="#" target="_blank" class="btn btn-secondary">
+          <i class="fab fa-instagram"></i> Ver Instagram
+        </a>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- MODAL FOTO AMPLIADA -->
+  <div class="modal" id="modalFoto" onclick="closeModal('modalFoto')">
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Foto ampliada">
+  </div>
+
+  <!-- MODAL DATOS BANCARIOS (SIN ALIAS) -->
+  <div class="modal" id="modalRegalos">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('modalRegalos')">&times;</span>
+      <h3 style="color: var(--color-acento); font-family: var(--fuente-titulo); font-size: 1.6rem; margin-bottom: 15px;">Datos Bancarios</h3>
+      
+      <p style="font-size: 0.8rem; color: var(--color-texto-suave);">Titular de la Cuenta:</p>
+      <div class="bank-data" id="bankTitular"></div>
+
+      <p style="font-size: 0.8rem; color: var(--color-texto-suave); margin-top: 10px;">Banco / Institución:</p>
+      <div class="bank-data" id="bankNombre"></div>
+
+      <p style="font-size: 0.8rem; color: var(--color-texto-suave); margin-top: 10px;">Número de Cuenta / CBU / RUT:</p>
+      <div class="bank-data" id="bankCBU"></div>
+
+      <button class="btn" style="margin-top: 15px;" onclick="copyText('bankCBU')">
+        <i class="fas fa-copy"></i> Copiar Número de Cuenta
+      </button>
+    </div>
+  </div>
+
+  <!-- CONFIGURACIÓN -->
+  <script>
+    const CONFIG = {
+      subtitulo: "Mis 15 Años",
+      nombre: "Valentina",
+      frase: "Hay momentos únicos e inolvidables, y compartirlos con las personas que más quiero los hace eternos. ¡Te espero para celebrar mis 15!",
+
+      fechaEvento: "2026-11-21T21:00:00",
+      fechaTexto: "Sábado 21 de Noviembre, 2026 - 21:00 Hs",
+
+      nombreLugar: "Salón Prado Elegance",
+      direccionLugar: "Av. Principal 1234, Ciudad",
+      urlUbicacionGPS: "https://maps.google.com",
+
+      urlGoogleFormRSVP: "https://forms.google.com",
+
+      dressCodeTitulo: "Código de Vestimenta",
+      dressCodeDetalle: "Elegante / Formal (Reservado el color rojo para la cumpleañera)",
+
+      regalosTexto: "El mejor regalo es tu presencia en este día tan especial. Si deseas hacerme un detalle, podés colaborar a través de la siguiente cuenta:",
+      bancoTitular: "Nombre del Titular",
+      bancoNombre: "Nombre del Banco / Entidad",
+      bancoCBU: "1234567890123456789012",
+
+      mostrarPlaylist: true,
+      urlGoogleFormPlaylist: "https://forms.google.com",
+
+      mostrarAlbumCompartido: true,
+      urlGoogleFormAlbum: "https://forms.google.com",
+
+      mostrarInstagram: true,
+      urlInstagram: "https://instagram.com"
+    };
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById('textSubtitulo').innerText = CONFIG.subtitulo;
+      document.getElementById('textNombre').innerText = CONFIG.nombre;
+      document.getElementById('textFrase').innerText = `"${CONFIG.frase}"`;
+      document.getElementById('textFechaHora').innerText = CONFIG.fechaTexto;
+      document.getElementById('textNombreLugar').innerText = CONFIG.nombreLugar;
+      document.getElementById('textDireccionLugar').innerText = CONFIG.direccionLugar;
+      document.getElementById('linkUbicacion').href = CONFIG.urlUbicacionGPS;
+      document.getElementById('linkRSVP').href = CONFIG.urlGoogleFormRSVP;
+
+      document.getElementById('textDressCodeTitulo').innerText = CONFIG.dressCodeTitulo;
+      document.getElementById('textDressCodeDetalle').innerText = CONFIG.dressCodeDetalle;
+
+      document.getElementById('textRegalos').innerText = CONFIG.regalosTexto;
+      document.getElementById('bankTitular').innerText = CONFIG.bancoTitular;
+      document.getElementById('bankNombre').innerText = CONFIG.bancoNombre;
+      document.getElementById('bankCBU').innerText = CONFIG.bancoCBU;
+
+      if (!CONFIG.mostrarPlaylist) document.getElementById('secPlaylist').classList.add('is-hidden');
+      else document.getElementById('linkPlaylist').href = CONFIG.urlGoogleFormPlaylist;
+
+      if (!CONFIG.mostrarAlbumCompartido) document.getElementById('secAlbum').classList.add('is-hidden');
+      else document.getElementById('linkAlbum').href = CONFIG.urlGoogleFormAlbum;
+
+      if (!CONFIG.mostrarInstagram) document.getElementById('secInstagram').classList.add('is-hidden');
+      else document.getElementById('linkInstagram').href = CONFIG.urlInstagram;
+
+      const track = document.getElementById('carouselTrack');
+      for (let i = 1; i <= 10; i++) {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        slide.innerHTML = `<img src="foto${i}.jpg" alt="Foto ${i}" onerror="this.src='https://via.placeholder.com/600x400/181013/e8d5d5?text=Foto+${i}'" onclick="openLightbox('foto${i}.jpg')">`;
+        track.appendChild(slide);
+      }
+
+      initCountdown();
+      initAudio();
+    });
+
+    let currentSlide = 0;
+    function moveSlide(direction) {
+      const track = document.getElementById('carouselTrack');
+      const totalSlides = 10;
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function openLightbox(src) {
+      const modal = document.getElementById('modalFoto');
+      const img = document.getElementById('lightboxImg');
+      img.src = src;
+      modal.style.display = 'flex';
+    }
+
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('¡Número de cuenta copiado!');
+      });
+    }
+
+    function initCountdown() {
+      const eventDate = new Date(CONFIG.fechaEvento).getTime();
+      
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const diff = eventDate - now;
+
+        if (diff < 0) {
+          clearInterval(timer);
+          document.getElementById('cdDays').innerText = "0";
+          document.getElementById('cdHours').innerText = "0";
+          document.getElementById('cdMinutes').innerText = "0";
+          document.getElementById('cdSeconds').innerText = "0";
+          return;
+        }
+
+        document.getElementById('cdDays').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById('cdHours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById('cdMinutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById('cdSeconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+      }, 1000);
+    }
+
+    let isPlaying = false;
+    const audio = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+
+    function toggleMusic() {
+      if (isPlaying) {
+        audio.pause();
+        musicBtn.classList.remove('playing');
+        isPlaying = false;
+      } else {
+        audio.play().then(() => {
+          musicBtn.classList.add('playing');
+          isPlaying = true;
+        }).catch(e => console.log(e));
+      }
+    }
+
+    function initAudio() {
+      audio.play().then(() => {
+        isPlaying = true;
+        musicBtn.classList.add('playing');
+      }).catch(() => {
+        document.addEventListener('click', function startAudio() {
+          if (!isPlaying) {
+            audio.play().then(() => {
+              isPlaying = true;
+              musicBtn.classList.add('playing');
+            }).catch(() => {});
+          }
+          document.removeEventListener('click', startAudio);
+        }, { once: true });
+      });
+    }
+  </script>
+</body>
+</html>
